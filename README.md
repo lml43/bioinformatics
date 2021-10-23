@@ -1,7 +1,13 @@
-# Bioinformatics - Project 1
+# Bioinformatics
+
+## Project 1
 
 ### Run program
-After cloning the repository, run the following command at the root folder:
+After cloning the repository, change directory to `project1`:
+```
+$ cd project1
+```
+Run the following command to execute the program:
 ```
 # Run program
 $ python main/main.py <CONFIG-FILE-PATH> <SEQ-1-FILE-PATH> <SEQ-2-FILE-PATH>
@@ -12,12 +18,12 @@ $ python main/main.py ./conf/config.txt ./data/protein1.fasta ./data/protein2.fa
 --- Generated sequence alignments in out.txt! ---
 
 ```
-### Run unit tests
-Run the following command at the root folder:
+### Unit tests
+Run unit tests
 ```
 $ pytest
 ```
-Testing result
+Testing result example
 ```
 ========================================= test session starts ==========================================
 platform darwin -- Python 3.8.5, pytest-6.2.2, py-1.9.0, pluggy-0.13.1
