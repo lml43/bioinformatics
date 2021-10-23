@@ -1,7 +1,6 @@
 import configparser
 
 
-
 class Utils:
     @staticmethod
     def load_config(configFilePath, configSection):
@@ -14,7 +13,7 @@ class Utils:
         return SAME_AWARD, DIFFERENCE_PENALTY, GAP_PENALTY, MAX_SEQ_LENGTH
 
     @staticmethod
-    def readGeneFromFile(file_name):
+    def readFromFile(file_name, MAX_SEQ_LENGTH):
         f = open(file_name)
         input_file = f.read()
         lst = input_file.split('\n')
@@ -22,4 +21,6 @@ class Utils:
         for str in lst:
             if str[0] != '>':
                 seq = seq + str
+
+        assert len(seq) <= MAX_SEQ_LENGTH, 'The sequence should not longer than {} characters'.format(MAX_SEQ_LENGTH)
         return seq

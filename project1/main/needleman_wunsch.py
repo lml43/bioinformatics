@@ -9,7 +9,7 @@ class NeedlemanWunsch:
         self.__gen2 = gen2
         self.__row = len(gen1) + 1
         self.__col = len(gen2) + 1
-        self.__lst = []
+        self.lst = []
         self.SAME_AWARD = SAME_AWARD
         self.DIFF_PENALTY = DIFF_PENALTY
         self.GAP_PENALTY = GAP_PENALTY
@@ -60,7 +60,7 @@ class NeedlemanWunsch:
 
     def __generateAlignments(self, currentGen1, currentGen2, i, j):
         if i == 0 and j == 0:
-            self.__lst.append((currentGen1, currentGen2))
+            self.lst.append((currentGen1, currentGen2))
             return
 
         for direction in self.arrowMat[i][j]:
@@ -94,4 +94,4 @@ class NeedlemanWunsch:
 
     def generateAlignments(self):
         self.__generateAlignments('', '', self.__row - 1, self.__col - 1)
-        return self.__lst
+        return self.lst
