@@ -5,15 +5,15 @@ UP = -1, 0
 
 class NeedlemanWunsch:
     def __init__(self, gen1, gen2, SAME_AWARD, DIFF_PENALTY, GAP_PENALTY):
-        self.gen1 = gen1
-        self.gen2 = gen2
-        self.row = len(gen1) + 1
-        self.col = len(gen2) + 1
-        self.lst = []
+        self.__gen1 = gen1
+        self.__gen2 = gen2
+        self.__row = len(gen1) + 1
+        self.__col = len(gen2) + 1
+        self.__lst = []
         self.SAME_AWARD = SAME_AWARD
         self.DIFF_PENALTY = DIFF_PENALTY
         self.GAP_PENALTY = GAP_PENALTY
-        self.scoreMat, self.arrowMat = self.__initMatrix(self.row, self.col)
+        self.scoreMat, self.arrowMat = self.__initMatrix(self.__row, self.__col)
 
     def __maximum(self, a, b, c):
         list_el = [a, b, c]
@@ -60,7 +60,7 @@ class NeedlemanWunsch:
 
     def __generateAlignments(self, currentGen1, currentGen2, i, j):
         if i == 0 and j == 0:
-            self.lst.append((currentGen1, currentGen2))
+            self.__lst.append((currentGen1, currentGen2))
             return
 
         for direction in self.arrowMat[i][j]:
@@ -68,23 +68,23 @@ class NeedlemanWunsch:
             newGen2 = currentGen2
 
             if direction == DIAG:
-                newGen1 = self.gen1[i - 1] + currentGen1
-                newGen2 = self.gen2[j - 1] + currentGen2
+                newGen1 = self.__gen1[i - 1] + currentGen1
+                newGen2 = self.__gen2[j - 1] + currentGen2
 
             if direction == LEFT:
                 newGen1 = '_' + currentGen1
-                newGen2 = self.gen2[j - 1] + currentGen2
+                newGen2 = self.__gen2[j - 1] + currentGen2
 
             if direction == UP:
-                newGen1 = self.gen1[i - 1] + currentGen1
+                newGen1 = self.__gen1[i - 1] + currentGen1
                 newGen2 = '_' + currentGen2
 
             self.__generateAlignments(newGen1, newGen2, i + direction[0], j + direction[1])
 
     def calculateScoreMatrix(self):
-        for i in range(1, self.row):
-            for j in range(1, self.col):
-                diagonal, left, up = self.__calculateScores(self.gen1, self.gen2, i, j, self.scoreMat)
+        for i in range(1, self.__row):
+            for j in range(1, self.__col):
+                diagonal, left, up = self.__calculateScores(self.__gen1, self.__gen2, i, j, self.scoreMat)
 
                 max_score = self.__maximum(up, left, diagonal)
                 arrows = self.__generateArrows(diagonal, left, up, max_score)
@@ -93,5 +93,5 @@ class NeedlemanWunsch:
                 self.arrowMat[i][j] = arrows
 
     def generateAlignments(self):
-        self.__generateAlignments('', '', self.row - 1, self.col - 1)
-        return self.lst
+        self.__generateAlignments('', '', self.__row - 1, self.__col - 1)
+        return self.__lst
