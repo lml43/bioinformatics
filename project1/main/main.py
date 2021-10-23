@@ -1,19 +1,29 @@
 from needleman_wunsch import NeedlemanWunsch
 from utils import Utils
+import sys
 
-configFilePath = '../conf/config.txt'
+# configFilePath = './conf/config.txt'
+# configSection = 'nw-config'
+#
+# seqFilePath1 = "./data/protein1.fasta"
+# seqFilePath2 = "./data/protein2.fasta"
+
+configFilePath = sys.argv[1]
 configSection = 'nw-config'
 
-seqFilePath1 = "../data/protein1.fasta"
-seqFilePath2 = "../data/protein2.fasta"
+seqFilePath1 = sys.argv[2]
+seqFilePath2 = sys.argv[3]
 
 
 def print_result(scoreMat, sequences, row, col):
-    print('SCORE = {}'.format(scoreMat[row][col]))
+    f = open('out.txt', 'w')
+    f.write('SCORE = {}'.format(scoreMat[row][col]))
     for s1, s2 in sequences:
-        print()
-        print(s1)
-        print(s2)
+        line = '\n\n{}\n{}'.format(s1, s2)
+        f.write(line)
+    print()
+    print('--- Generated sequence alignments in out.txt! ---')
+    print()
 
 
 def main():
