@@ -18,6 +18,7 @@ seqFilePath2 = sys.argv[3]
 def print_result(scoreMat, sequences, row, col):
     f = open('out.txt', 'w')
     f.write('SCORE = {}'.format(scoreMat[row][col]))
+    f.write('\n\nTOTAL = {}'.format(len(sequences)))
     for s1, s2 in sequences:
         line = '\n\n{}\n{}'.format(s1, s2)
         f.write(line)
